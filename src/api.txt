@@ -1,0 +1,1 @@
+https://allugofrases.herokuapp.com/frases/random
