@@ -2,21 +2,26 @@ import { useEffect, useState } from 'react';
 import './App.css';
 
 const App = () => {
-  let myName = 'Fulano';
+  let myName = '';
 
+  const [nameInput, setNameInput] = useState('');
   const [time, setTime] = useState('00:00');
   const [greeting, setGreeting] = useState('--');
-  const [phrase, setPhrase] = useState('');
-  const [phraseAuthor, setPhraseAuthor] = useState('');
+  const [quote, setQuote] = useState('');
+  const [author, setAuthor] = useState('');
 
   useEffect(() => {
-    const getPhrase = async () => {
-      const req = await fetch('https://api.quotable.io/quotes/random');
-      const json = await req.json();
-      setPhrase(json.content);
-      setPhraseAuthor(json.author);
+    const getAuthor = async () => {
+      await fetch('https://api.quotable.io/random')
+        .then(res => res.json())
+        .then(
+          (quote) => {
+            setQuote(quote.content);
+            setAuthor(quote.author);
+          }
+        );
     }
-    getPhrase();
+    getAuthor();
   }, []);
 
   useEffect(() => {
@@ -50,17 +55,37 @@ const App = () => {
     }
   }
 
+  const handleNameInputChange = () => {
+    
+  };
+
   return (
     <div className="App">
-      <div className="top"></div>
+      <div className="top">
+        <form action="">
+          <input 
+            type="text" 
+            name="name" 
+            id="name" 
+            placeholder="Qual o seu nome?"
+            onChange={handleNameInputChange}
+            />
+          <input 
+            id="send" 
+            type="submit" 
+            value="Enviar"
+          />
+        </form>
+      </div>
       <div className="middle">
         <h1>{time}</h1>
         <h3>{greeting}</h3>
+        
       </div>
       <div className="bottom">
         <div className="phrase">
-          "{phrase}"
-          <div className="author">{phraseAuthor}</div>
+          "{quote}"
+          <div className="author">{author}</div>
         </div>
       </div>
     </div>
