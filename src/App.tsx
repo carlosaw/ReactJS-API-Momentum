@@ -70,7 +70,7 @@ const App = () => {
     <div className="App">
       <div className="top">
         <form action="">
-          <input id='name' type='text' name='name' onChange={handleNameInputChange} placeholder='Digite seu nome' />
+          <input id='name' type='text' name='name' onChange={handleNameInputChange} />
           <button id='send' onClick={userName}>Enviar</button>
         </form>
       </div>
@@ -79,7 +79,9 @@ const App = () => {
         <h1>{time}</h1>
          {nameInput &&
           <h3>{greeting}</h3>
-         }               
+         }
+          
+               
       </div>
 
       <div className="bottom">
