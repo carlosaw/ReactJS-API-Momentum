@@ -77,7 +77,7 @@ input#name {
   font-size: medium;
   color: #888;
 }
-input#send {
+button#send {
   padding: 10px 25px;
   margin-left: 20px;
   border-radius: 10px;
@@ -86,8 +86,9 @@ input#send {
   background-color: #7787d7;
   color: #FFF;
   cursor: pointer;
+  height: 38px;
 }
-input#send:hover {
+button#send:hover {
   opacity: 0.8;
 }
 

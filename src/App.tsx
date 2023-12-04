@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 import './App.css';
 
 const App = () => {
-  let myName = '';
+  
 
   const [nameInput, setNameInput] = useState('');
   const [time, setTime] = useState('00:00');
   const [greeting, setGreeting] = useState('--');
   const [quote, setQuote] = useState('');
   const [author, setAuthor] = useState('');
-
+  // Pega Author e frase
   useEffect(() => {
     const getAuthor = async () => {
       await fetch('https://api.quotable.io/random')
@@ -23,16 +23,16 @@ const App = () => {
     }
     getAuthor();
   }, []);
-
+  // Pega Hora e minuto
   useEffect(() => {
     let timer = setInterval(updateTime, 1000);
     return () => clearInterval(timer);
   }, []);
-
+  // Atualiza o greeting ao carreagar pagina
   useEffect(() => {
     updateGreeting();
   }, [time]);
-
+  // Atualiza tempo
   const updateTime = () => {
     let now = new Date();
     let hours = now.getHours();
@@ -42,8 +42,9 @@ const App = () => {
 
     setTime(`${hourStr}:${minStr}`);
   }
-
+  // Atualiza o greeting
   const updateGreeting = () => {
+    let myName = nameInput;
     let now = new Date();
     let hours = now.getHours();
     if (hours > 0 && hours < 12) {
@@ -54,40 +55,38 @@ const App = () => {
       setGreeting(`Boa noite, ${myName}.`);
     }
   }
-
-  const handleNameInputChange = () => {
-    
-  };
+  // Pega nome digitado no input
+  const handleNameInputChange = (event) => {
+    setNameInput(event.target.value);
+  }
+  // Aparece o nome digitado no greeting
+  const dados = (event) => {
+    event.preventDefault();
+    // console.log(nameInput);
+    updateGreeting();
+  }
 
   return (
     <div className="App">
       <div className="top">
         <form action="">
-          <input 
-            type="text" 
-            name="name" 
-            id="name" 
-            placeholder="Qual o seu nome?"
-            onChange={handleNameInputChange}
-            />
-          <input 
-            id="send" 
-            type="submit" 
-            value="Enviar"
-          />
+          <input id='name' type='text' name='name' onChange={handleNameInputChange} />
+          <button id='send' onClick={dados}>Enviar</button>
         </form>
       </div>
+
       <div className="middle">
         <h1>{time}</h1>
         <h3>{greeting}</h3>
-        
       </div>
+
       <div className="bottom">
         <div className="phrase">
           "{quote}"
           <div className="author">{author}</div>
         </div>
       </div>
+
     </div>
   );
 }
