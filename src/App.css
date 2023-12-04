@@ -75,7 +75,8 @@ input#name {
   border: 1px solid #CCC;
   outline: none;
   font-size: medium;
-  color: #888;
+  color: #000;
+  opacity: .5;
 }
 button#send {
   padding: 10px 25px;

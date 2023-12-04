@@ -28,7 +28,7 @@ const App = () => {
     let timer = setInterval(updateTime, 1000);
     return () => clearInterval(timer);
   }, []);
-  // Atualiza o greeting ao carreagar pagina
+  // Atualiza o greeting ao carregar pagina
   useEffect(() => {
     updateGreeting();
   }, [time]);
@@ -44,7 +44,7 @@ const App = () => {
   }
   // Atualiza o greeting
   const updateGreeting = () => {
-    let myName = nameInput;
+    const myName = nameInput;
     let now = new Date();
     let hours = now.getHours();
     if (hours > 0 && hours < 12) {
@@ -60,7 +60,7 @@ const App = () => {
     setNameInput(event.target.value);
   }
   // Aparece o nome digitado no greeting
-  const dados = (event) => {
+  const userName = (event) => {
     event.preventDefault();
     // console.log(nameInput);
     updateGreeting();
@@ -70,14 +70,16 @@ const App = () => {
     <div className="App">
       <div className="top">
         <form action="">
-          <input id='name' type='text' name='name' onChange={handleNameInputChange} />
-          <button id='send' onClick={dados}>Enviar</button>
+          <input id='name' type='text' name='name' onChange={handleNameInputChange} placeholder='Digite seu nome' />
+          <button id='send' onClick={userName}>Enviar</button>
         </form>
       </div>
 
       <div className="middle">
         <h1>{time}</h1>
-        <h3>{greeting}</h3>
+         {nameInput &&
+          <h3>{greeting}</h3>
+         }               
       </div>
 
       <div className="bottom">
