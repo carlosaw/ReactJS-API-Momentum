@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './App.css';
 
 const App = () => {
-  
+  const divRef = useRef(null);
 
   const [nameInput, setNameInput] = useState('');
   const [time, setTime] = useState('00:00');
   const [greeting, setGreeting] = useState('--');
   const [quote, setQuote] = useState('');
   const [author, setAuthor] = useState('');
+  const [showDiv, setShowDiv] = useState(false);
   // Pega Author e frase
   useEffect(() => {
     const getAuthor = async () => {
@@ -63,6 +64,7 @@ const App = () => {
   const userName = (event) => {
     event.preventDefault();
     // console.log(nameInput);
+    setShowDiv(true);
     updateGreeting();
   }
 
@@ -77,7 +79,7 @@ const App = () => {
 
       <div className="middle">
         <h1>{time}</h1>
-         {nameInput &&
+         {showDiv &&
           <h3>{greeting}</h3>
          }
           
